@@ -1,0 +1,19 @@
+<!-- src/main/resources/templates/home.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Spring Truck Sim</title>
+</head>
+
+<body>
+  <h1 th:text="${message}"></h1> <!-- This will display "Welcome to the Spring Truck Sim!" -->
+  <div id="message"></div>
+  <script>
+    fetch('/api/message')
+      .then(response => response.json())
+      .then(data => document.getElementById('message').innerText = data.message);
+  </script>
+</body>
+
+</html>

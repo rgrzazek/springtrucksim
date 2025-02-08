@@ -1,0 +1,42 @@
+# Untested template from an LLM
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-truck-sim-deployment
+  labels:
+    app: spring-truck-sim
+spec:
+  replicas: 1  # You can change this number to scale
+  selector:
+    matchLabels:
+      app: spring-truck-sim
+  template:
+    metadata:
+      labels:
+        app: spring-truck-sim
+    spec:
+      containers:
+        - name: spring-truck-sim
+          image: <your-image-name>:<tag>  # Replace with your image name and tag
+          ports:
+            - containerPort: 8080  # Port exposed by the container
+          resources:
+            limits:
+              memory: "512Mi"  # Example, adjust based on needs
+              cpu: "1"  # Example, adjust based on needs
+            requests:
+              memory: "256Mi"  # Example, adjust based on needs
+              cpu: "0.5"  # Example, adjust based on needs
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-truck-sim-service
+spec:
+  selector:
+    app: spring-truck-sim
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080  # Port that the container is listening on
+  type: ClusterIP  # You can change this to LoadBalancer if you want external access
