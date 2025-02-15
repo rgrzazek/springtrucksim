@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Why I Built This</title>
+</head>
+
+<body>
+
+  <h1>About the Spring Truck Sim</h1>
+  <p>TLDR: I've thought a lot about how trucks and trailers turn corners. Most truck sims don't feel right, so I made
+    my own.</p>
+
+  <p>As a truck driver, I used to obsess about the way trucks and trailers would behave as they turned corners and
+    reversed. I used to think about how the behaviour would change if something was positioned a little differently,
+    or one of the trailers was a bit longer.</p>
+
+  <p>I also enjoy simple games, like the flash games that used to be so popular on sites like Miniclip. Most of truck
+    games did a poor job at making the wheels track over the ground properly. Even the bird's eye view parking games
+    with nothing else to worry about got it wrong. They would have trailers drift sideways as the truck turned, as if
+    the trailer was on ice rather than rolling wheels.</p>
+
+  <p>I decided to make a simple bird's eye simulator of my own. This should demonstrate how trucks really behave
+    around corners (and reversing), even if it's not the most entertaining game. The physics is simple enough that I
+    can model road trains and various combinations without any extra effort after I complete the basic model.</p>
+
+
+  <th:block th:replace="~{layout :: content}">
+  </th:block>
+
+</body>
+
+</html>
