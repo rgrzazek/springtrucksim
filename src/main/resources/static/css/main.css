@@ -67,10 +67,52 @@ nav ul li a:hover {
   color: var(--accent);
 }
 
-/* ── Canvas centering ── */
+/* ── Page content ── */
+main {
+  padding: 2rem;
+}
+
+/* ── Project cards ── */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.project-card {
+  display: block;
+  background: white;
+  border-left: 4px solid var(--accent);
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card h2 {
+  margin: 0 0 0.75rem 0;
+  color: var(--chrome);
+}
+
+.project-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.project-card:hover {
+  border-left-color: var(--chrome);
+}
+
+/* ── Canvas: scale to fit content area, preserve aspect ratio ── */
 canvas {
   display: block;
   margin: 2rem auto;
+  width: min(
+    calc(100vw - var(--nav-width) - 4rem),
+    calc(100vh - var(--header-height) - 4rem)
+  );
+  aspect-ratio: 1;
 }
 
 /* ── Mobile: nav drops below header as horizontal bar ── */
