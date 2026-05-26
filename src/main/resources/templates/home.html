@@ -4,10 +4,13 @@
 
 <head>
   <title>Spring Truck Sim</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 
 <body>
-  <h1 th:text="${message}"></h1> <!-- This will display "Welcome to the Spring Truck Sim!" -->
+  <div th:insert="~{fragments/header :: header}"></div>
+  <header th:insert="~{fragments/nav :: nav}"></header>
+  <h1 th:text="${message}"></h1>
   <div id="message"></div>
   <script>
     fetch('/api/message')

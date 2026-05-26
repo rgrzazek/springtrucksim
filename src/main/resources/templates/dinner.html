@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Tonight's Dinner</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+
+<body>
+  <div th:insert="~{fragments/header :: header}"></div>
+  <header th:insert="~{fragments/nav :: nav}"></header>
+
+  <main style="padding: 2rem;">
+    <h1 th:text="${recipe.title}">Recipe Title</h1>
+
+    <h2>Ingredients</h2>
+    <ul>
+      <li th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient}"></li>
+    </ul>
+
+    <h2>Method</h2>
+    <p th:text="${recipe.method}"></p>
+  </main>
+
+</body>
+
+</html>

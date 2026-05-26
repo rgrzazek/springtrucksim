@@ -7,6 +7,62 @@ canvas.width = 1000;
 canvas.height = 1000;
 const PIXELS_PER_METRE = 10
 
+// Make canvas focusable
+canvas.tabIndex = 0;
+
+// Capture focus immediately
+canvas.focus();
+
+const keys = {
+  up: false,
+  down: false,
+  left: false,
+  right: false,
+};
+
+canvas.addEventListener("keydown", (e) => {
+  switch (e.key) {
+    case "ArrowUp":
+      keys.up = true;
+      break;
+    case "ArrowDown":
+      keys.down = true;
+      break;
+    case "ArrowLeft":
+      keys.left = true;
+      break;
+    case "ArrowRight":
+      keys.right = true;
+      break;
+  }
+
+  // Stop page scrolling
+  e.preventDefault();
+});
+
+canvas.addEventListener("keyup", (e) => {
+  switch (e.key) {
+    case "ArrowUp":
+      keys.up = false;
+      break;
+    case "ArrowDown":
+      keys.down = false;
+      break;
+    case "ArrowLeft":
+      keys.left = false;
+      break;
+    case "ArrowRight":
+      keys.right = false;
+      break;
+  }
+
+  e.preventDefault();
+});
+
+// let x = 100;
+// let y = 100;
+// const speed = 4;
+
 
 class Vehicle {
   constructor(x, y, type, leader) {
@@ -36,32 +92,55 @@ class Vehicle {
   }
 
   roll(deltaTime) {
-    let x, y, distance; // Where to aim for, what distance to aim for
+    const speed = 0.1 * deltaTime;
+
     if (this.leader == null) { // The front of the combo is user-controlled
-      x = mouseX, y = mouseY, distance = 0
-    } else { // everything except the front is determined by its leader
-      [x, y] = this.leader.towpoint()
-      distance = this.stats.length
+      this.angle = Math.atan2((this.follower.y - this.y), (this.follower.x - this.x));
+      if (keys.up) {
+        this.x -= Math.cos(this.angle) * speed;
+        this.y -= Math.sin(this.angle) * speed;
+        if (keys.left) {
+          this.x += Math.cos(this.angle + Math.PI / 2) * speed * 2 / 3;
+          this.y += Math.sin(this.angle + Math.PI / 2) * speed * 2 / 3;
+        }
+        if (keys.right) {
+          this.x += Math.cos(this.angle - Math.PI / 2) * speed * 2 / 3;
+          this.y += Math.sin(this.angle - Math.PI / 2) * speed * 2 / 3;
+        }
+      }
+      if (keys.down) {
+        this.x += Math.cos(this.angle) * speed;
+        this.y += Math.sin(this.angle) * speed;
+        if (keys.left) {
+          this.x += Math.cos(this.angle - Math.PI / 2) * speed * 2 / 3;
+          this.y += Math.sin(this.angle - Math.PI / 2) * speed * 2 / 3;
+        }
+        if (keys.right) {
+          this.x += Math.cos(this.angle + Math.PI / 2) * speed * 2 / 3;
+          this.y += Math.sin(this.angle + Math.PI / 2) * speed * 2 / 3;
+        }
+      }
+      return;
     }
+
+    // everything except the front is determined by its leader
+    let x, y, distance; // Where to aim for, what distance to aim for
+    [x, y] = this.leader.towpoint()
 
     const currentDistance = Math.sqrt((x - this.x) ** 2 + (y - this.y) ** 2);
     // positive x-axis = 0 radians
     this.angle = Math.atan2((y - this.y), (x - this.x));
 
-    // Don't jitter
-    if (Math.abs(currentDistance - distance) < 1) return;
 
-    const speed = 0.1 * deltaTime;
+    distance = currentDistance - this.stats.length;
+    // Don't jitter
+    if (Math.abs(distance) < 1) return;
+
 
     // Although it's physically impossible for a trailer (which shortcuts) to
     // go faster than its lead, speed limit everything for simplicity.
-    if (currentDistance < distance) {
-      this.x -= Math.cos(this.angle) * Math.min(currentDistance, speed);
-      this.y -= Math.sin(this.angle) * Math.min(currentDistance, speed);
-    } else {
-      this.x += Math.cos(this.angle) * Math.min(currentDistance, speed);
-      this.y += Math.sin(this.angle) * Math.min(currentDistance, speed);
-    }
+    this.x += Math.cos(this.angle) * distance;
+    this.y += Math.sin(this.angle) * distance;
   }
 
   draw() {
@@ -107,15 +186,23 @@ class Vehicle {
 
 
 
+// // Vehicles MUST be listed from the front of the truck to model correctly
+// const steer = new Vehicle(canvas.width / 2, canvas.height / 2, null, null);
+// const drive = new Vehicle(canvas.width / 2, canvas.height / 2, "prime", steer);
+// steer.follower = drive;
+// const lead = new Vehicle(canvas.width / 2, canvas.height / 2, "btrailer", drive);
+// const dolly = new Vehicle(canvas.width / 2, canvas.height / 2, "dolly", lead);
+// const atrailer = new Vehicle(canvas.width / 2, canvas.height / 2, "atrailer", dolly);
+// const btrailer = new Vehicle(canvas.width / 2, canvas.height / 2, "btrailer", atrailer);
+// const vehicles = [steer, drive, lead, dolly, atrailer, btrailer]
+
 // Vehicles MUST be listed from the front of the truck to model correctly
 const steer = new Vehicle(canvas.width / 2, canvas.height / 2, null, null);
 const drive = new Vehicle(canvas.width / 2, canvas.height / 2, "prime", steer);
-const lead = new Vehicle(canvas.width / 2, canvas.height / 2, "btrailer", drive);
-const dolly = new Vehicle(canvas.width / 2, canvas.height / 2, "dolly", lead);
-const atrailer = new Vehicle(canvas.width / 2, canvas.height / 2, "atrailer", dolly);
+steer.follower = drive;
+const atrailer = new Vehicle(canvas.width / 2, canvas.height / 2, "atrailer", drive);
 const btrailer = new Vehicle(canvas.width / 2, canvas.height / 2, "btrailer", atrailer);
-const vehicles = [steer, drive, lead, dolly, atrailer, btrailer]
-
+const vehicles = [steer, drive, atrailer, btrailer]
 
 let mouseX = canvas.width / 2, mouseY = canvas.height / 2;
 canvas.addEventListener("mousemove", (event) => {
@@ -124,8 +211,12 @@ canvas.addEventListener("mousemove", (event) => {
   mouseY = event.clientY - rect.top;
 });
 
+// window.addEventListener("keydown", ...);
+// window.addEventListener("keyup", ...);
+
 function update(deltaTime) {
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear background
+
   vehicles.forEach(v => v.roll(deltaTime));
   vehicles.forEach(v => v.draw());
 }

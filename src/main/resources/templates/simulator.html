@@ -2,27 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Why I Built This</title>
+  <title>Simulator</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}">
   <style>
-    body {
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    canvas {
-      background: lightgray;
-    }
+    canvas { background: lightgray; }
   </style>
 </head>
 
 <body>
+  <div th:insert="~{fragments/header :: header}"></div>
   <header th:insert="~{fragments/nav :: nav}"></header>
 
   <canvas id="simulator"></canvas>
-  <script th:src="@{/js/simulator.js}"></script>
+  <script type="module" th:src="@{/js/simulator.js}"></script>
 
 
 </body>

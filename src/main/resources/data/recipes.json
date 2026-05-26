@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Toast",
+    "ingredients": ["2 slices bread", "Butter"],
+    "method": "Toast bread until golden brown. Spread butter immediately while hot so it melts in."
+  },
+  {
+    "id": 2,
+    "title": "Steamed Rice",
+    "ingredients": ["1 cup jasmine rice", "1.5 cups water", "Pinch of salt"],
+    "method": "Rinse rice until water runs clear. Add to pot with water and salt, bring to a boil, then cover and simmer on the lowest heat for 12 minutes. Rest off heat for 5 minutes before fluffing."
+  },
+  {
+    "id": 3,
+    "title": "Baked Chips",
+    "ingredients": ["3 medium potatoes", "2 tbsp olive oil", "Salt"],
+    "method": "Preheat oven to 220°C. Cut potatoes into wedges, toss with oil and salt. Spread on a baking tray in a single layer. Bake 35-40 minutes, turning halfway, until golden and crisp."
+  }
+]

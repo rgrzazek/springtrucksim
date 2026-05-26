@@ -3,9 +3,12 @@
 
 <head>
   <title>Why I Built This</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 
 <body>
+  <div th:insert="~{fragments/header :: header}"></div>
+  <header th:insert="~{fragments/nav :: nav}"></header>
 
   <h1>About the Spring Truck Sim</h1>
   <p>TLDR: I've thought a lot about how trucks and trailers turn corners. Most truck sims don't feel right, so I made
@@ -21,12 +24,8 @@
     the trailer was on ice rather than rolling wheels.</p>
 
   <p>I decided to make a simple bird's eye simulator of my own. This should demonstrate how trucks really behave
-    around corners (and reversing), even if it's not the most entertaining game. The physics is simple enough that I
+    around corners (and reversing). The physics is simple enough that I
     can model road trains and various combinations without any extra effort after I complete the basic model.</p>
-
-
-  <th:block th:replace="~{layout :: content}">
-  </th:block>
 
 </body>
 
