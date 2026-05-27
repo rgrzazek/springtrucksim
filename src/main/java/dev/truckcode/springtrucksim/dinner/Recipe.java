@@ -6,7 +6,7 @@ public class Recipe {
     private int id;
     private String title;
     private List<String> ingredients;
-    private String method;
+    private List<String> method;
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
@@ -17,8 +17,8 @@ public class Recipe {
     public List<String> getIngredients() { return ingredients; }
     public void setIngredients(List<String> ingredients) { this.ingredients = ingredients; }
 
-    public String getMethod() { return method; }
-    public void setMethod(String method) { this.method = method; }
+    public List<String> getMethod() { return method; }
+    public void setMethod(List<String> method) { this.method = method; }
 
     public String getSlug() {
         return title.toLowerCase().replaceAll("[^a-z0-9]+", "-").replaceAll("^-|-$", "");

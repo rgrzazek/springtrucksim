@@ -54,10 +54,30 @@
       background: white;
     }
 
-    .method-text {
+    .method-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
       font-size: 1.1rem;
       line-height: 1.8;
-      margin: 0;
+      counter-reset: step;
+    }
+
+    .method-list li {
+      counter-increment: step;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .method-list li::before {
+      content: counter(step) ". ";
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .done {
+      text-decoration: line-through;
+      opacity: 0.4;
     }
 
     .scroll-hint {
@@ -85,10 +105,16 @@
 
     <section class="recipe-section section-method">
       <h1 th:text="${recipe.title}">Recipe Title</h1>
-      <p class="method-text" th:text="${recipe.method}"></p>
+      <ol class="method-list">
+        <li th:each="step : ${recipe.method}" th:text="${step}"></li>
+      </ol>
     </section>
   </main>
-
+  <script>
+    document.querySelectorAll('.ingredients-list li, .method-list li').forEach(li => {
+      li.addEventListener('click', () => li.classList.toggle('done'));
+    });
+  </script>
 
 </body>
 
