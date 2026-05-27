@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title th:text="${recipe.title}">Recipe</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+  <style>
+    body {
+      overflow: hidden;
+    }
+
+    main {
+      padding: 0;
+      height: calc(100vh - var(--header-height));
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+    }
+
+    @media (max-width: 640px) {
+      main {
+        height: calc(100dvh - var(--header-height) - var(--nav-mobile-height));
+      }
+    }
+
+    .recipe-section {
+      height: 100%;
+      scroll-snap-align: start;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .recipe-section h1 {
+      margin: 0 0 1.25rem 0;
+      font-size: 1.4rem;
+      color: var(--chrome);
+    }
+
+    .ingredients-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 1.75rem;
+      line-height: 1.6;
+    }
+
+    .ingredients-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .section-method {
+      background: white;
+    }
+
+    .method-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .scroll-hint {
+      margin-top: auto;
+      padding-top: 1rem;
+      font-size: 0.8rem;
+      color: rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div th:insert="~{fragments/header :: header}"></div>
+  <header th:insert="~{fragments/nav :: nav}"></header>
+
+  <main>
+    <section class="recipe-section section-ingredients">
+      <h1 th:text="${recipe.title}">Recipe Title</h1>
+      <ul class="ingredients-list">
+        <li th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient}"></li>
+      </ul>
+      <p class="scroll-hint">scroll for method</p>
+    </section>
+
+    <section class="recipe-section section-method">
+      <h1 th:text="${recipe.title}">Recipe Title</h1>
+      <p class="method-text" th:text="${recipe.method}"></p>
+    </section>
+  </main>
+
+
+</body>
+
+</html>

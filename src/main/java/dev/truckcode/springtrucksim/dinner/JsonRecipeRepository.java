@@ -29,4 +29,9 @@ public class JsonRecipeRepository implements RecipeRepository {
     public Optional<Recipe> findById(int id) {
         return recipes.stream().filter(r -> r.getId() == id).findFirst();
     }
+
+    @Override
+    public Optional<Recipe> findBySlug(String slug) {
+        return recipes.stream().filter(r -> r.getSlug().equals(slug)).findFirst();
+    }
 }

@@ -19,4 +19,8 @@ public class Recipe {
 
     public String getMethod() { return method; }
     public void setMethod(String method) { this.method = method; }
+
+    public String getSlug() {
+        return title.toLowerCase().replaceAll("[^a-z0-9]+", "-").replaceAll("^-|-$", "");
+    }
 }

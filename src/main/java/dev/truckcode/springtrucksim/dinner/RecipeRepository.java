@@ -6,4 +6,5 @@ import java.util.Optional;
 public interface RecipeRepository {
     List<Recipe> findAll();
     Optional<Recipe> findById(int id);
+    Optional<Recipe> findBySlug(String slug);
 }

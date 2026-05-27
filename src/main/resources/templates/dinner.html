@@ -2,8 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Tonight's Dinner</title>
+  <title>Recipes</title>
   <link rel="stylesheet" th:href="@{/css/main.css}">
+  <style>
+    .recipe-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .recipe-list a {
+      display: block;
+      padding: 1rem 1.25rem;
+      background: white;
+      border-left: 4px solid var(--accent);
+      text-decoration: none;
+      color: var(--chrome);
+      font-size: 1.1rem;
+    }
+
+    .recipe-list a:hover {
+      border-left-color: var(--chrome);
+    }
+  </style>
 </head>
 
 <body>
@@ -11,15 +33,13 @@
   <header th:insert="~{fragments/nav :: nav}"></header>
 
   <main>
-    <h1 th:text="${recipe.title}">Recipe Title</h1>
-
-    <h2>Ingredients</h2>
-    <ul>
-      <li th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient}"></li>
-    </ul>
-
-    <h2>Method</h2>
-    <p th:text="${recipe.method}"></p>
+    <h1>Recipes</h1>
+    <nav class="recipe-list">
+      <a th:each="recipe : ${recipes}"
+         th:href="@{/dinner/{slug}(slug=${recipe.slug})}"
+         th:text="${recipe.title}">
+      </a>
+    </nav>
   </main>
 
 </body>
