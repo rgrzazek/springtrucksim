@@ -62,5 +62,44 @@
       "Combine well and add pasta.",
       "Lid on or add water to keep it wet — soak up and boil off most of the liquid."
     ]
+  },
+  {
+    "id": 5,
+    "title": "Fried Rice",
+    "ingredients": [
+      "450g cooked rice (packet)",
+      "150g shredded ham",
+      "2 eggs",
+      "Extras (mushrooms, leftovers, whatever's there)",
+      "Soy sauce",
+      "Oil"
+    ],
+    "method": [
+      "Heat a wok or large pan on high until very hot.",
+      "Add oil and fry any raw extras (e.g. mushrooms) until cooked. Set aside.",
+      "Add a little more oil, crack in the eggs, scramble until just set then break into chunks.",
+      "Add the rice, breaking up any clumps. Stir-fry on high heat for 2-3 minutes.",
+      "Add ham and cooked extras back in. Toss everything together.",
+      "Season with soy sauce to taste. Serve immediately."
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Omelette",
+    "ingredients": [
+      "3 eggs",
+      "Fillings, diced small (onion, mushroom, ham, cheese, whatever's there)",
+      "Oil or butter",
+      "Salt and pepper",
+      "Bread (for toast)"
+    ],
+    "method": [
+      "Dice fillings small. Fry in oil until cooked. Set aside in a bowl.",
+      "Crack eggs into a jug or bowl, season, and beat well. Add the fried fillings and stir until everything is wet.",
+      "Heat pan on medium-high with a little oil or butter.",
+      "Pour in the egg mixture and spread it out. Let it set on the bottom.",
+      "One flip when the top is mostly set. Cook briefly on the other side.",
+      "Slide out and serve with toast."
+    ]
   }
 ]
