@@ -5,7 +5,7 @@ import java.util.List;
 public class Recipe {
     private int id;
     private String title;
-    private List<String> ingredients;
+    private List<Ingredient> ingredients;
     private List<String> method;
 
     public int getId() { return id; }
@@ -14,8 +14,14 @@ public class Recipe {
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
 
-    public List<String> getIngredients() { return ingredients; }
-    public void setIngredients(List<String> ingredients) { this.ingredients = ingredients; }
+    public List<Ingredient> getIngredients() { return ingredients; }
+    public void setIngredients(List<Ingredient> ingredients) { this.ingredients = ingredients; }
+
+    public String getIngredientNames() {
+        return ingredients.stream()
+                .map(Ingredient::name)
+                .collect(java.util.stream.Collectors.joining(","));
+    }
 
     public List<String> getMethod() { return method; }
     public void setMethod(List<String> method) { this.method = method; }

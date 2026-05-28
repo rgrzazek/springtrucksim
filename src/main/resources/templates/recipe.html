@@ -98,7 +98,7 @@
     <section class="recipe-section section-ingredients">
       <h1 th:text="${recipe.title}">Recipe Title</h1>
       <ul class="ingredients-list">
-        <li th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient}"></li>
+        <li th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient.display}"></li>
       </ul>
       <p class="scroll-hint">scroll for method</p>
     </section>

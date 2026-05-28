@@ -5,25 +5,28 @@
   <title>Recipes</title>
   <link rel="stylesheet" th:href="@{/css/main.css}">
   <style>
-    .recipe-list {
+    .chip-filter {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
       gap: 0.5rem;
-      margin-top: 1.5rem;
+      margin: 1.5rem 0;
     }
 
-    .recipe-list a {
-      display: block;
-      padding: 1rem 1.25rem;
+    .chip {
+      padding: 0.35rem 0.85rem;
+      border: 2px solid var(--chrome);
       background: white;
-      border-left: 4px solid var(--accent);
-      text-decoration: none;
       color: var(--chrome);
-      font-size: 1.1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      user-select: none;
     }
 
-    .recipe-list a:hover {
-      border-left-color: var(--chrome);
+    .chip.selected {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
     }
   </style>
 </head>
@@ -34,13 +37,45 @@
 
   <main>
     <h1>Recipes</h1>
-    <nav class="recipe-list">
-      <a th:each="recipe : ${recipes}"
+    <div class="chip-filter">
+      <button class="chip"
+              th:each="name : ${ingredientNames}"
+              th:text="${name}"
+              th:attr="data-name=${name}">
+      </button>
+    </div>
+    <section class="project-grid">
+      <a class="project-card"
+         th:each="recipe : ${recipes}"
          th:href="@{/dinner/{slug}(slug=${recipe.slug})}"
-         th:text="${recipe.title}">
+         th:attr="data-ingredients=${recipe.ingredientNames}">
+        <h2 th:text="${recipe.title}"></h2>
       </a>
-    </nav>
+    </section>
   </main>
+
+  <script>
+    const chips = document.querySelectorAll('.chip');
+    const cards = document.querySelectorAll('.project-card');
+    const selected = new Set();
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const name = chip.dataset.name;
+        chip.classList.toggle('selected');
+        selected.has(name) ? selected.delete(name) : selected.add(name);
+        filter();
+      });
+    });
+
+    function filter() {
+      cards.forEach(card => {
+        if (selected.size === 0) { card.style.display = ''; return; }
+        const ingredients = new Set(card.dataset.ingredients.split(','));
+        card.style.display = [...selected].every(s => ingredients.has(s)) ? '' : 'none';
+      });
+    }
+  </script>
 
 </body>
 

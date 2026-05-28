@@ -28,4 +28,14 @@ public class RecipeService {
     public List<Recipe> getAllRecipes() {
         return recipeRepository.findAll();
     }
+
+    public List<String> getAllIngredientNames() {
+        return recipeRepository.findAll().stream()
+                .flatMap(r -> r.getIngredients().stream())
+                .filter(i -> !"staple".equals(i.type()))
+                .map(Ingredient::name)
+                .distinct()
+                .sorted()
+                .collect(java.util.stream.Collectors.toList());
+    }
 }

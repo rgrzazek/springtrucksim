@@ -32,6 +32,7 @@ public class DinnerController {
     @GetMapping("/dinner")
     public String dinnerList(Model model) {
         model.addAttribute("recipes", recipeService.getAllRecipes());
+        model.addAttribute("ingredientNames", recipeService.getAllIngredientNames());
         return "dinner";
     }
 }
