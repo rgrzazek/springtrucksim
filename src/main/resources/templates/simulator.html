@@ -8,6 +8,29 @@
     canvas {
       background: lightgray;
     }
+
+    #combo-select {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 0 2rem 1rem;
+    }
+
+    #combo-select button {
+      padding: 0.4rem 0.9rem;
+      border: 2px solid var(--chrome);
+      background: white;
+      color: var(--chrome);
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    #combo-select button.active,
+    #combo-select button:hover {
+      background: var(--chrome);
+      color: var(--bg);
+    }
   </style>
 </head>
 
@@ -16,6 +39,16 @@
   <header th:insert="~{fragments/nav :: nav}"></header>
 
   <canvas id="simulator"></canvas>
+
+  <div id="combo-select">
+    <button data-combo="Semi">Semi</button>
+    <button data-combo="B-Double">B-Double</button>
+    <button data-combo="AB Triple" class="active">AB Triple</button>
+    <button data-combo="A-Double">A-Double</button>
+    <button data-combo="B-Triple">B-Triple</button>
+    <button data-combo="A-Triple">A-Triple</button>
+  </div>
+
   <script type="module" th:src="@{/js/simulator.js}"></script>
 
   <main>
