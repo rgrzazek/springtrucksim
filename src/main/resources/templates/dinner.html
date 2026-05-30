@@ -44,6 +44,11 @@
               th:attr="data-name=${name}">
       </button>
     </div>
+    <form id="ai-form" th:action="@{/dinner/ai-recipe}" method="post" style="display:none; margin-bottom: 1.5rem;">
+      <div id="ai-inputs"></div>
+      <button type="submit" class="chip selected">Nothing here? Ask AI</button>
+    </form>
+
     <section class="project-grid">
       <a class="project-card"
          th:each="recipe : ${recipes}"
@@ -55,8 +60,10 @@
   </main>
 
   <script>
-    const chips = document.querySelectorAll('.chip');
+    const chips = document.querySelectorAll('.chip[data-name]');
     const cards = document.querySelectorAll('.project-card');
+    const aiForm = document.getElementById('ai-form');
+    const aiInputs = document.getElementById('ai-inputs');
     const selected = new Set();
 
     chips.forEach(chip => {
@@ -74,6 +81,11 @@
         const ingredients = new Set(card.dataset.ingredients.split(','));
         card.style.display = [...selected].every(s => ingredients.has(s)) ? '' : 'none';
       });
+
+      aiInputs.innerHTML = [...selected]
+        .map(s => `<input type="hidden" name="ingredients" value="${s}">`)
+        .join('');
+      aiForm.style.display = selected.size > 0 ? '' : 'none';
     }
   </script>
 
