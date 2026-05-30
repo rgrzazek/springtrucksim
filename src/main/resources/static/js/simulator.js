@@ -6,7 +6,22 @@ const DEBUG = false;
 
 canvas.width = 1000;
 canvas.height = 1000;
-const PIXELS_PER_METRE = 10;
+
+const MAPS = {
+  "emerald": {
+    src: "/images/emerald-truck-stop.png",
+    pixelsPerMetre: 4.5,
+    spawnX: 500,
+    spawnY: 500,
+    spawnAngle: 0,
+  }
+};
+
+const MAP = MAPS["emerald"];
+const bgImage = new Image();
+bgImage.src = MAP.src;
+
+const TRUCK_SPEED_MS = 10; // metres per second
 
 const MAX_STEER_ANGLE = Math.PI / 5;
 const LATERAL_RATIO = Math.tan(MAX_STEER_ANGLE);
@@ -65,7 +80,7 @@ class Vehicle {
 
     this.stats = { ...VEHICLE_TYPES[type] };
     Object.keys(this.stats).forEach(k => {
-      if (typeof this.stats[k] === "number") this.stats[k] *= PIXELS_PER_METRE;
+      if (typeof this.stats[k] === "number") this.stats[k] *= MAP.pixelsPerMetre;
     });
     if (leader == null) return;
     this.image = new Image();
@@ -81,7 +96,7 @@ class Vehicle {
   }
 
   roll(deltaTime) {
-    const speed = 0.1 * deltaTime;
+    const speed = TRUCK_SPEED_MS * MAP.pixelsPerMetre * (deltaTime / 1000);
 
     if (this.leader == null) {
       this.angle = Math.atan2(this.follower.y - this.y, this.follower.x - this.x);
@@ -166,7 +181,7 @@ function buildCombo(sx, sy, headingAngle, trailerTypes) {
 
   const steer = new Vehicle(sx, sy, null, null);
 
-  const primeLength = VEHICLE_TYPES.prime.length * PIXELS_PER_METRE;
+  const primeLength = VEHICLE_TYPES.prime.length * MAP.pixelsPerMetre;
   const drive = new Vehicle(
     sx + Math.cos(bwd) * primeLength,
     sy + Math.sin(bwd) * primeLength,
@@ -184,8 +199,8 @@ function buildCombo(sx, sy, headingAngle, trailerTypes) {
 
   for (const type of trailerTypes) {
     const raw = VEHICLE_TYPES[type];
-    const length = raw.length * PIXELS_PER_METRE;
-    const hitchOffset = raw.hitchOffset * PIXELS_PER_METRE;
+    const length = raw.length * MAP.pixelsPerMetre;
+    const hitchOffset = raw.hitchOffset * MAP.pixelsPerMetre;
 
     const vx = towX + Math.cos(bwd) * length;
     const vy = towY + Math.sin(bwd) * length;
@@ -204,8 +219,8 @@ function buildCombo(sx, sy, headingAngle, trailerTypes) {
 
 // ── Init & combo switching ────────────────────────────────────────────────────
 let vehicles = buildCombo(
-  canvas.width / 2, canvas.height / 2,
-  0,
+  MAP.spawnX, MAP.spawnY,
+  MAP.spawnAngle,
   CONFIGS["AB Triple"]
 );
 
@@ -223,6 +238,7 @@ document.querySelectorAll("[data-combo]").forEach(btn => {
 // ── Loop ──────────────────────────────────────────────────────────────────────
 function update(deltaTime) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
   vehicles.forEach(v => v.roll(deltaTime));
   vehicles.forEach(v => v.draw());
 }
