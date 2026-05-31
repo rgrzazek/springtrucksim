@@ -11,7 +11,7 @@
 
     main {
       padding: 0;
-      height: calc(100vh - var(--header-height));
+      height: calc(100dvh - var(--header-height));
       overflow-y: scroll;
       scroll-snap-type: y mandatory;
     }
@@ -28,7 +28,8 @@
       padding: 1.5rem 2rem;
       display: flex;
       flex-direction: column;
-      overflow-y: auto;
+      overflow: hidden;
+      position: relative;
     }
 
     .recipe-section h1 {
@@ -96,14 +97,27 @@
     }
 
     .scroll-hint {
-      margin-top: auto;
-      text-align: center;
-      font-size: 20rem;
-      line-height: 1;
-      color: var(--chrome);
-      opacity: 0.15;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 12rem;
+      overflow: hidden;
       pointer-events: none;
       user-select: none;
+    }
+
+    .scroll-hint::before {
+      content: '↓';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      font-size: 20rem;
+      line-height: 1;
+      text-align: center;
+      color: var(--chrome);
+      opacity: 0.15;
     }
   </style>
 </head>
@@ -119,7 +133,8 @@
       <ul class="ingredients-list">
         <li th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient.display}"></li>
       </ul>
-      <p class="scroll-hint">↓</p>
+      <div class="scroll-hint"></div>
+
     </section>
 
     <section class="recipe-section section-method">

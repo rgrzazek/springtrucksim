@@ -16,7 +16,7 @@ body {
   background: var(--bg);
   padding-left: var(--nav-width);
   padding-top: var(--header-height);
-  min-height: 100vh;
+  min-height: 100dvh;
   font-family: sans-serif;
 }
 
@@ -41,7 +41,7 @@ nav {
   top: var(--header-height);
   left: 0;
   width: var(--nav-width);
-  height: calc(100vh - var(--header-height));
+  height: calc(100dvh - var(--header-height));
   background: var(--chrome);
   padding: 1rem 0;
   overflow-y: auto;

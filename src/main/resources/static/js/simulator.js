@@ -42,14 +42,14 @@ canvas.focus();
 
 const keys = { up: false, down: false, left: false, right: false };
 
-canvas.addEventListener("keydown", (e) => {
+document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowUp") keys.up = true;
   if (e.key === "ArrowDown") keys.down = true;
   if (e.key === "ArrowLeft") keys.left = true;
   if (e.key === "ArrowRight") keys.right = true;
   e.preventDefault();
 });
-canvas.addEventListener("keyup", (e) => {
+document.addEventListener("keyup", (e) => {
   if (e.key === "ArrowUp") keys.up = false;
   if (e.key === "ArrowDown") keys.down = false;
   if (e.key === "ArrowLeft") keys.left = false;
@@ -236,12 +236,36 @@ document.querySelectorAll("[data-combo]").forEach(btn => {
   });
 });
 
+// ── Controls overlay ──────────────────────────────────────────────────────────
+let showOverlay = true;
+
+function dismissOverlay() { showOverlay = false; }
+document.addEventListener("keydown", dismissOverlay, { once: true });
+canvas.addEventListener("touchstart", dismissOverlay, { once: true });
+
+function drawOverlay() {
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+  ctx.save();
+  ctx.fillStyle = "rgba(33, 56, 45, 0.72)";
+  ctx.fillRect(cx - 200, cy - 70, 400, 140);
+  ctx.fillStyle = "#f5efe0";
+  ctx.font = "bold 32px sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText("↑ ↓ ← →  to drive", cx, cy + 10);
+  ctx.font = "22px sans-serif";
+  ctx.fillStyle = "coral";
+  ctx.fillText("touch to steer on mobile", cx, cy + 48);
+  ctx.restore();
+}
+
 // ── Loop ──────────────────────────────────────────────────────────────────────
 function update(deltaTime) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
   vehicles.forEach(v => v.roll(deltaTime));
   vehicles.forEach(v => v.draw());
+  if (showOverlay) drawOverlay();
 }
 
 let lastTime = performance.now();
