@@ -1,87 +1,5 @@
 [
   {
-    "id": 1,
-    "title": "Toast",
-    "ingredients": [
-      {
-        "name": "bread",
-        "quantity": "2 slices",
-        "display": "2 slices bread",
-        "type": "pantry"
-      },
-      {
-        "name": "butter",
-        "quantity": null,
-        "display": "Butter",
-        "type": "staple"
-      }
-    ],
-    "method": [
-      "Toast bread until golden brown.",
-      "Spread butter immediately while hot so it melts in."
-    ]
-  },
-  {
-    "id": 2,
-    "title": "Steamed Rice",
-    "ingredients": [
-      {
-        "name": "jasmine rice",
-        "quantity": "1 cup",
-        "display": "1 cup jasmine rice",
-        "type": "pantry"
-      },
-      {
-        "name": "water",
-        "quantity": "1.5 cups",
-        "display": "1.5 cups water",
-        "type": "staple"
-      },
-      {
-        "name": "salt",
-        "quantity": "pinch",
-        "display": "Pinch of salt",
-        "type": "staple"
-      }
-    ],
-    "method": [
-      "Rinse rice until water runs clear.",
-      "Add to pot with water and salt, bring to a boil.",
-      "Cover and simmer on the lowest heat for 12 minutes.",
-      "Rest off heat for 5 minutes before fluffing."
-    ]
-  },
-  {
-    "id": 3,
-    "title": "Baked Chips",
-    "ingredients": [
-      {
-        "name": "potatoes",
-        "quantity": "3 medium",
-        "display": "3 medium potatoes",
-        "type": "fresh"
-      },
-      {
-        "name": "olive oil",
-        "quantity": "2 tbsp",
-        "display": "2 tbsp olive oil",
-        "type": "staple"
-      },
-      {
-        "name": "salt",
-        "quantity": null,
-        "display": "Salt",
-        "type": "staple"
-      }
-    ],
-    "method": [
-      "Preheat oven to 220°C.",
-      "Cut potatoes into wedges, toss with oil and salt.",
-      "Spread on a baking tray in a single layer.",
-      "Bake 35-40 minutes, turning halfway, until golden and crisp."
-    ]
-  },
-  {
     "id": 4,
     "title": "Orange Pasta",
     "ingredients": [
@@ -132,6 +50,12 @@
         "quantity": "250mL",
         "display": "250mL beef stock",
         "type": "pantry"
+      },
+      {
+        "name": "habanero chilli",
+        "quantity": "1",
+        "display": "1 habanero chilli",
+        "type": "fresh"
       }
     ],
     "method": [
@@ -256,37 +180,134 @@
     ]
   },
   {
-    "id": 7,
-    "title": "Experimental Plate",
+    "id": 8,
+    "title": "Brown Pasta",
     "ingredients": [
       {
-        "name": "white bread",
-        "quantity": null,
-        "display": "White bread",
+        "name": "beef mince",
+        "quantity": "500g",
+        "display": "500g beef mince",
+        "type": "fresh"
+      },
+      {
+        "name": "onion",
+        "quantity": "1",
+        "display": "1 onion",
+        "type": "fresh"
+      },
+      {
+        "name": "habanero chilli",
+        "quantity": "1",
+        "display": "1 habanero chilli",
+        "type": "fresh"
+      },
+      {
+        "name": "canned tomatoes",
+        "quantity": "400g",
+        "display": "400g canned tomatoes",
         "type": "pantry"
       },
       {
-        "name": "chocolate",
-        "quantity": null,
-        "display": "Chocolate",
+        "name": "red wine",
+        "quantity": "splash",
+        "display": "Splash of red wine",
         "type": "pantry"
       },
       {
-        "name": "coke",
-        "quantity": null,
-        "display": "Coke",
+        "name": "pasta",
+        "quantity": "250g",
+        "display": "250g pasta",
         "type": "pantry"
       },
       {
-        "name": "raw pasta",
+        "name": "grated cheese",
         "quantity": null,
-        "display": "Raw pasta",
-        "type": "pantry"
+        "display": "Grated cheese, to serve",
+        "type": "staple"
+      },
+      {
+        "name": "olive oil",
+        "quantity": null,
+        "display": "Olive oil",
+        "type": "staple"
       }
     ],
     "method": [
-      "Arrange on a plate.",
-      "Question your choices."
+      "Brown mince in a hot pan with a little oil — don't crowd it, you want colour not steam.",
+      "Add diced onion and chilli. Cook down until soft.",
+      "Add the wine and let it reduce for a minute.",
+      "Add the canned tomatoes, break them up. Season well.",
+      "Simmer 20–30 minutes until the sauce thickens.",
+      "Cook pasta in salted boiling water, drain, and serve topped with sauce and grated cheese."
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Stroganoff on Rice",
+    "ingredients": [
+      {
+        "name": "steak",
+        "quantity": "600g",
+        "display": "600g scotch fillet or similar",
+        "type": "fresh"
+      },
+      {
+        "name": "onion",
+        "quantity": "1",
+        "display": "1 onion",
+        "type": "fresh"
+      },
+      {
+        "name": "mushrooms",
+        "quantity": "300g",
+        "display": "300g mushrooms (more is fine)",
+        "type": "fresh"
+      },
+      {
+        "name": "sour cream",
+        "quantity": "150mL",
+        "display": "150mL sour cream",
+        "type": "fresh"
+      },
+      {
+        "name": "beef stock",
+        "quantity": "500mL",
+        "display": "500mL beef stock",
+        "type": "pantry"
+      },
+      {
+        "name": "dijon mustard",
+        "quantity": "1 tbsp",
+        "display": "1 generous tbsp Dijon mustard",
+        "type": "pantry"
+      },
+      {
+        "name": "rice",
+        "quantity": null,
+        "display": "Rice to serve (2 cups raw or 450g pre-cooked packet)",
+        "type": "pantry"
+      },
+      {
+        "name": "butter",
+        "quantity": null,
+        "display": "Butter",
+        "type": "staple"
+      },
+      {
+        "name": "plain flour",
+        "quantity": null,
+        "display": "Plain flour (a couple of tbsp)",
+        "type": "staple"
+      }
+    ],
+    "method": [
+      "Sear the steak hard on both sides for colour, then set aside almost raw in the middle.",
+      "Cook diced onion in butter until soft. Add mushrooms and cook until just softened — don't let them shrink to nothing.",
+      "Sprinkle flour over the buttery mix and stir for a minute so it cooks out.",
+      "Add stock cautiously at first, stirring out any lumps, then pour in the rest.",
+      "Add sour cream and mustard. Bring to just below a boil, then simmer until thickened.",
+      "Slice the rested steak into thin strips. Stir in right before serving — it finishes cooking in 1–2 minutes and stays tender.",
+      "Serve over rice."
     ]
   }
 ]

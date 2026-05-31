@@ -88,6 +88,7 @@ nav ul li a:hover {
   color: var(--accent);
 }
 
+
 /* ── Page content ── */
 main {
   padding: 2rem;
@@ -171,4 +172,5 @@ canvas {
     padding: 0 1rem;
     line-height: var(--nav-mobile-height);
   }
+
 }

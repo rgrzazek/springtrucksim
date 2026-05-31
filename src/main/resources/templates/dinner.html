@@ -5,6 +5,40 @@
   <title>Recipes</title>
   <link rel="stylesheet" th:href="@{/css/main.css}">
   <style>
+    .tonights-pick {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--chrome);
+      color: var(--bg);
+      padding: 1rem 1.5rem;
+      text-decoration: none;
+      margin-bottom: 2rem;
+    }
+
+    .tonights-pick:hover {
+      background: #2e4d3f;
+    }
+
+    .tonights-pick-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    .tonights-pick-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .tonights-pick-arrow {
+      margin-left: auto;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
     .chip-filter {
       display: flex;
       flex-wrap: wrap;
@@ -36,6 +70,12 @@
   <header th:insert="~{fragments/nav :: nav}"></header>
 
   <main>
+    <a class="tonights-pick" th:href="@{/dinner/{slug}(slug=${tonightsRecipe.slug})}">
+      <span class="tonights-pick-label">Tonight's Pick</span>
+      <span class="tonights-pick-title" th:text="${tonightsRecipe.title}"></span>
+      <span class="tonights-pick-arrow">→</span>
+    </a>
+
     <h1>Recipes</h1>
     <div class="chip-filter">
       <button class="chip" th:each="name : ${ingredientNames}" th:text="${name}" th:attr="data-name=${name}">

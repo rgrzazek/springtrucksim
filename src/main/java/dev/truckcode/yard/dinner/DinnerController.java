@@ -43,6 +43,7 @@ public class DinnerController {
     public String dinnerList(Model model) {
         model.addAttribute("recipes", recipeService.getAllRecipes());
         model.addAttribute("ingredientNames", recipeService.getAllIngredientNames());
+        model.addAttribute("tonightsRecipe", recipeService.getTodaysRecipe());
         return "dinner";
     }
 
