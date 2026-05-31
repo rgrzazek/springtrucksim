@@ -46,6 +46,27 @@ nav {
   padding: 1rem 0;
   overflow-y: auto;
   z-index: 90;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-social {
+  margin-top: auto;
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+}
+
+.nav-social a {
+  color: var(--bg);
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+}
+
+.nav-social a:hover {
+  opacity: 1;
+  color: var(--accent);
 }
 
 nav ul {
@@ -136,6 +157,13 @@ canvas {
   nav ul {
     display: flex;
     flex-direction: row;
+  }
+
+  .nav-social {
+    margin-top: 0;
+    margin-left: auto;
+    padding: 0 1rem;
+    flex-shrink: 0;
   }
 
   nav ul li a {

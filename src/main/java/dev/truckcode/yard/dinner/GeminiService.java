@@ -1,4 +1,4 @@
-package dev.truckcode.springtrucksim.dinner;
+package dev.truckcode.yard.dinner;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package dev.truckcode.springtrucksim.dinner;
+package dev.truckcode.yard.dinner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

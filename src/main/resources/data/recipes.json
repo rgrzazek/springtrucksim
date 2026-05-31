@@ -3,8 +3,18 @@
     "id": 1,
     "title": "Toast",
     "ingredients": [
-      {"name": "bread", "quantity": "2 slices", "display": "2 slices bread", "type": "pantry"},
-      {"name": "butter", "quantity": null, "display": "Butter", "type": "staple"}
+      {
+        "name": "bread",
+        "quantity": "2 slices",
+        "display": "2 slices bread",
+        "type": "pantry"
+      },
+      {
+        "name": "butter",
+        "quantity": null,
+        "display": "Butter",
+        "type": "staple"
+      }
     ],
     "method": [
       "Toast bread until golden brown.",
@@ -15,9 +25,24 @@
     "id": 2,
     "title": "Steamed Rice",
     "ingredients": [
-      {"name": "jasmine rice", "quantity": "1 cup", "display": "1 cup jasmine rice", "type": "pantry"},
-      {"name": "water", "quantity": "1.5 cups", "display": "1.5 cups water", "type": "staple"},
-      {"name": "salt", "quantity": "pinch", "display": "Pinch of salt", "type": "staple"}
+      {
+        "name": "jasmine rice",
+        "quantity": "1 cup",
+        "display": "1 cup jasmine rice",
+        "type": "pantry"
+      },
+      {
+        "name": "water",
+        "quantity": "1.5 cups",
+        "display": "1.5 cups water",
+        "type": "staple"
+      },
+      {
+        "name": "salt",
+        "quantity": "pinch",
+        "display": "Pinch of salt",
+        "type": "staple"
+      }
     ],
     "method": [
       "Rinse rice until water runs clear.",
@@ -30,9 +55,24 @@
     "id": 3,
     "title": "Baked Chips",
     "ingredients": [
-      {"name": "potatoes", "quantity": "3 medium", "display": "3 medium potatoes", "type": "fresh"},
-      {"name": "olive oil", "quantity": "2 tbsp", "display": "2 tbsp olive oil", "type": "staple"},
-      {"name": "salt", "quantity": null, "display": "Salt", "type": "staple"}
+      {
+        "name": "potatoes",
+        "quantity": "3 medium",
+        "display": "3 medium potatoes",
+        "type": "fresh"
+      },
+      {
+        "name": "olive oil",
+        "quantity": "2 tbsp",
+        "display": "2 tbsp olive oil",
+        "type": "staple"
+      },
+      {
+        "name": "salt",
+        "quantity": null,
+        "display": "Salt",
+        "type": "staple"
+      }
     ],
     "method": [
       "Preheat oven to 220°C.",
@@ -45,14 +85,54 @@
     "id": 4,
     "title": "Orange Pasta",
     "ingredients": [
-      {"name": "mince", "quantity": "500g", "display": "500g mince", "type": "fresh"},
-      {"name": "mushrooms", "quantity": "200g", "display": "200g mushrooms", "type": "fresh"},
-      {"name": "onion", "quantity": "1", "display": "1 onion", "type": "fresh"},
-      {"name": "garlic", "quantity": null, "display": "A few cloves of garlic", "type": "fresh"},
-      {"name": "cream", "quantity": "300mL", "display": "300mL thickened cream (small bottle)", "type": "fresh"},
-      {"name": "pasta", "quantity": "250g", "display": "250g pasta (half packet)", "type": "pantry"},
-      {"name": "tomatoes", "quantity": "1 can", "display": "1 can tomatoes (400g)", "type": "pantry"},
-      {"name": "beef stock", "quantity": "250mL", "display": "250mL beef stock", "type": "pantry"}
+      {
+        "name": "mince",
+        "quantity": "500g",
+        "display": "500g mince",
+        "type": "fresh"
+      },
+      {
+        "name": "mushrooms",
+        "quantity": "200g",
+        "display": "200g mushrooms",
+        "type": "fresh"
+      },
+      {
+        "name": "onion",
+        "quantity": "1",
+        "display": "1 onion",
+        "type": "fresh"
+      },
+      {
+        "name": "garlic",
+        "quantity": null,
+        "display": "A few cloves of garlic",
+        "type": "fresh"
+      },
+      {
+        "name": "cream",
+        "quantity": "300mL",
+        "display": "300mL thickened cream (small bottle)",
+        "type": "fresh"
+      },
+      {
+        "name": "pasta",
+        "quantity": "250g",
+        "display": "250g pasta (half packet)",
+        "type": "pantry"
+      },
+      {
+        "name": "tomatoes",
+        "quantity": "1 can",
+        "display": "1 can tomatoes (400g)",
+        "type": "pantry"
+      },
+      {
+        "name": "beef stock",
+        "quantity": "250mL",
+        "display": "250mL beef stock",
+        "type": "pantry"
+      }
     ],
     "method": [
       "Dice mushrooms, garlic, and onion.",
@@ -67,12 +147,42 @@
     "id": 5,
     "title": "Fried Rice",
     "ingredients": [
-      {"name": "cooked rice", "quantity": "450g", "display": "450g cooked rice (packet)", "type": "pantry"},
-      {"name": "ham", "quantity": "150g", "display": "150g shredded ham", "type": "fresh"},
-      {"name": "eggs", "quantity": "2", "display": "2 eggs", "type": "fresh"},
-      {"name": "mushrooms", "quantity": null, "display": "Mushrooms (optional)", "type": "fresh"},
-      {"name": "soy sauce", "quantity": null, "display": "Soy sauce", "type": "pantry"},
-      {"name": "oil", "quantity": null, "display": "Oil", "type": "staple"}
+      {
+        "name": "cooked rice",
+        "quantity": "450g",
+        "display": "450g cooked rice (packet)",
+        "type": "pantry"
+      },
+      {
+        "name": "ham",
+        "quantity": "150g",
+        "display": "150g shredded ham",
+        "type": "fresh"
+      },
+      {
+        "name": "eggs",
+        "quantity": "2",
+        "display": "2 eggs",
+        "type": "fresh"
+      },
+      {
+        "name": "mushrooms",
+        "quantity": null,
+        "display": "Mushrooms (optional)",
+        "type": "fresh"
+      },
+      {
+        "name": "soy sauce",
+        "quantity": null,
+        "display": "Soy sauce",
+        "type": "pantry"
+      },
+      {
+        "name": "oil",
+        "quantity": null,
+        "display": "Oil",
+        "type": "staple"
+      }
     ],
     "method": [
       "Heat a wok or large pan on high until very hot.",
@@ -87,14 +197,54 @@
     "id": 6,
     "title": "Omelette",
     "ingredients": [
-      {"name": "eggs", "quantity": "3", "display": "3 eggs", "type": "fresh"},
-      {"name": "onion", "quantity": null, "display": "Onion, diced small", "type": "fresh"},
-      {"name": "mushrooms", "quantity": null, "display": "Mushrooms, diced small", "type": "fresh"},
-      {"name": "ham", "quantity": null, "display": "Ham, diced small", "type": "fresh"},
-      {"name": "cheese", "quantity": null, "display": "Cheese", "type": "fresh"},
-      {"name": "oil", "quantity": null, "display": "Oil or butter", "type": "staple"},
-      {"name": "salt", "quantity": null, "display": "Salt and pepper", "type": "staple"},
-      {"name": "bread", "quantity": null, "display": "Bread (for toast)", "type": "pantry"}
+      {
+        "name": "eggs",
+        "quantity": "3",
+        "display": "3 eggs",
+        "type": "fresh"
+      },
+      {
+        "name": "onion",
+        "quantity": null,
+        "display": "Onion, diced small",
+        "type": "fresh"
+      },
+      {
+        "name": "mushrooms",
+        "quantity": null,
+        "display": "Mushrooms, diced small",
+        "type": "fresh"
+      },
+      {
+        "name": "ham",
+        "quantity": null,
+        "display": "Ham, diced small",
+        "type": "fresh"
+      },
+      {
+        "name": "cheese",
+        "quantity": null,
+        "display": "Cheese",
+        "type": "fresh"
+      },
+      {
+        "name": "oil",
+        "quantity": null,
+        "display": "Oil or butter",
+        "type": "staple"
+      },
+      {
+        "name": "salt",
+        "quantity": null,
+        "display": "Salt and pepper",
+        "type": "staple"
+      },
+      {
+        "name": "bread",
+        "quantity": null,
+        "display": "Bread (for toast)",
+        "type": "pantry"
+      }
     ],
     "method": [
       "Dice fillings small. Fry in oil until cooked. Set aside in a bowl.",
@@ -103,6 +253,40 @@
       "Pour in the egg mixture and spread it out. Let it set on the bottom.",
       "One flip when the top is mostly set. Cook briefly on the other side.",
       "Slide out and serve with toast."
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Experimental Plate",
+    "ingredients": [
+      {
+        "name": "white bread",
+        "quantity": null,
+        "display": "White bread",
+        "type": "pantry"
+      },
+      {
+        "name": "chocolate",
+        "quantity": null,
+        "display": "Chocolate",
+        "type": "pantry"
+      },
+      {
+        "name": "coke",
+        "quantity": null,
+        "display": "Coke",
+        "type": "pantry"
+      },
+      {
+        "name": "raw pasta",
+        "quantity": null,
+        "display": "Raw pasta",
+        "type": "pantry"
+      }
+    ],
+    "method": [
+      "Arrange on a plate.",
+      "Question your choices."
     ]
   }
 ]

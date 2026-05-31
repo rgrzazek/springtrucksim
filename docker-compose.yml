@@ -1,7 +1,27 @@
-version: '3'
 services:
+  db:
+    image: postgres:17
+    container_name: yard-db
+    environment:
+      POSTGRES_DB: yard
+      POSTGRES_USER: yard
+      POSTGRES_PASSWORD: yard
+    ports:
+      - "5432:5432"
+    volumes:
+      - yard-db-data:/var/lib/postgresql/data
+
   app:
     build: .
+    container_name: yard
     ports:
       - "8080:8080"
-    container_name: spring-truck-sim
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/yard
+      SPRING_DATASOURCE_USERNAME: yard
+      SPRING_DATASOURCE_PASSWORD: yard
+
+volumes:
+  yard-db-data:

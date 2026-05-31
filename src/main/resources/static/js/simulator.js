@@ -11,9 +11,9 @@ const MAPS = {
   "emerald": {
     src: "/images/emerald-truck-stop.png",
     pixelsPerMetre: 4.5,
-    spawnX: 500,
-    spawnY: 500,
-    spawnAngle: 0,
+    spawnX: 563,
+    spawnY: 876,
+    spawnAngle: 5.32
   }
 };
 
@@ -100,6 +100,7 @@ class Vehicle {
 
     if (this.leader == null) {
       this.angle = Math.atan2(this.follower.y - this.y, this.follower.x - this.x);
+      // console.log(this.x, this.y, this.angle); // DEBUGGING - find out where truck is
 
       // Keyboard
       if (keys.up) {

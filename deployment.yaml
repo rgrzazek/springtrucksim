@@ -2,21 +2,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spring-truck-sim-deployment
+  name: yard-deployment
   labels:
-    app: spring-truck-sim
+    app: yard
 spec:
   replicas: 1  # You can change this number to scale
   selector:
     matchLabels:
-      app: spring-truck-sim
+      app: yard
   template:
     metadata:
       labels:
-        app: spring-truck-sim
+        app: yard
     spec:
       containers:
-        - name: spring-truck-sim
+        - name: yard
           image: <your-image-name>:<tag>  # Replace with your image name and tag
           ports:
             - containerPort: 8080  # Port exposed by the container
@@ -31,10 +31,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: spring-truck-sim-service
+  name: yard-service
 spec:
   selector:
-    app: spring-truck-sim
+    app: yard
   ports:
     - protocol: TCP
       port: 80

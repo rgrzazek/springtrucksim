@@ -1,4 +1,4 @@
-package dev.truckcode.springtrucksim;
+package dev.truckcode.yard;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

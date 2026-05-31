@@ -5,7 +5,7 @@ FROM amazoncorretto:21-alpine
 WORKDIR /app
 
 # Copy the built JAR file into the container
-COPY build/libs/spring-truck-sim-0.0.1-SNAPSHOT.jar app.jar
+COPY build/libs/yard-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the port that the Spring Boot app will run on
 EXPOSE 8080

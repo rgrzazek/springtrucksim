@@ -1,10 +1,10 @@
-package dev.truckcode.springtrucksim;
+package dev.truckcode.yard;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringTruckSimApplicationTests {
+class YardApplicationTests {
 
 	@Test
 	void contextLoads() {

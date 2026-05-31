@@ -38,22 +38,17 @@
   <main>
     <h1>Recipes</h1>
     <div class="chip-filter">
-      <button class="chip"
-              th:each="name : ${ingredientNames}"
-              th:text="${name}"
-              th:attr="data-name=${name}">
+      <button class="chip" th:each="name : ${ingredientNames}" th:text="${name}" th:attr="data-name=${name}">
       </button>
     </div>
     <form id="ai-form" th:action="@{/dinner/ai-recipe}" method="post" style="display:none; margin-bottom: 1.5rem;">
       <div id="ai-inputs"></div>
-      <button type="submit" class="chip selected">Nothing here? Ask AI</button>
+      <button type="submit" class="chip selected">Don't see anything you like? Ask AI</button>
     </form>
 
     <section class="project-grid">
-      <a class="project-card"
-         th:each="recipe : ${recipes}"
-         th:href="@{/dinner/{slug}(slug=${recipe.slug})}"
-         th:attr="data-ingredients=${recipe.ingredientNames}">
+      <a class="project-card" th:each="recipe : ${recipes}" th:href="@{/dinner/{slug}(slug=${recipe.slug})}"
+        th:attr="data-ingredients=${recipe.ingredientNames}">
         <h2 th:text="${recipe.title}"></h2>
       </a>
     </section>
