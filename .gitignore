@@ -19,6 +19,7 @@ Thumbs.db
 
 ### Local secrets ###
 src/main/resources/application-local.properties
+.env
 
 ### STS ###
 .apt_generated

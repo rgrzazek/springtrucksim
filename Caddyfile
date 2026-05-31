@@ -1,0 +1,7 @@
+truckcode.dev {
+    reverse_proxy app:8080
+}
+
+www.truckcode.dev {
+    redir https://truckcode.dev{uri} permanent
+}
