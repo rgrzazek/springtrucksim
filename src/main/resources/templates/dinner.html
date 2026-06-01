@@ -4,6 +4,8 @@
 <head>
   <title>Recipes</title>
   <link rel="stylesheet" th:href="@{/css/main.css}">
+  <link rel="stylesheet" th:href="@{/css/dinner.css}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/css/tom-select.css">
   <style>
     .tonights-pick {
       display: flex;
@@ -39,11 +41,62 @@
       color: var(--accent);
     }
 
+    .dinner-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .source-filter {
+      display: flex;
+      border: 2px solid var(--chrome);
+      width: fit-content;
+    }
+
+    .source-btn {
+      padding: 0.35rem 1rem;
+      border: none;
+      border-right: 1px solid var(--chrome);
+      background: white;
+      color: var(--chrome);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-family: inherit;
+    }
+
+    .source-btn:last-child {
+      border-right: none;
+    }
+
+    .source-btn.active {
+      background: var(--chrome);
+      color: var(--bg);
+    }
+
+    .generate-btn {
+      padding: 0.35rem 1rem;
+      border: 2px solid var(--accent);
+      background: white;
+      color: var(--accent);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-family: inherit;
+      font-weight: bold;
+    }
+
+    .generate-btn:hover {
+      background: var(--accent);
+      color: white;
+    }
+
     .chip-filter {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin: 1.5rem 0;
+      margin-bottom: 1rem;
     }
 
     .chip {
@@ -62,6 +115,125 @@
       border-color: var(--accent);
       color: white;
     }
+
+    /* ── Generate modal ── */
+    dialog {
+      width: 100vw;
+      height: 100dvh;
+      max-width: 100vw;
+      margin: 0;
+      padding: 0;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+    }
+
+    dialog[open] {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    dialog::backdrop {
+      display: none;
+    }
+
+    .dialog-box {
+      background: var(--bg);
+      padding: 2rem;
+      max-width: 480px;
+      width: 90%;
+    }
+
+    .dialog-box h2 {
+      margin: 0 0 0.5rem;
+      color: var(--chrome);
+    }
+
+    .dialog-box p {
+      margin: 0 0 1.5rem;
+      font-size: 0.9rem;
+      color: var(--chrome);
+      opacity: 0.7;
+    }
+
+    .dialog-error {
+      opacity: 1;
+      color: var(--accent);
+      border-left: 3px solid var(--accent);
+      padding-left: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .dialog-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      padding: 0.6rem 1.5rem;
+      background: var(--chrome);
+      color: var(--bg);
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-family: inherit;
+      font-weight: bold;
+    }
+
+    .btn-primary:hover {
+      background: #2e4d3f;
+    }
+
+    .btn-ghost {
+      padding: 0.6rem 1rem;
+      background: none;
+      border: none;
+      color: var(--chrome);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-family: inherit;
+      opacity: 0.6;
+    }
+
+    .btn-ghost:hover {
+      opacity: 1;
+    }
+
+    /* Tom Select overrides */
+    .ts-wrapper {
+      margin-bottom: 0;
+    }
+
+    .ts-control {
+      border: 2px solid var(--chrome);
+      border-radius: 0;
+      background: white;
+      padding: 0.4rem 0.5rem;
+    }
+
+    .ts-control:focus-within {
+      border-color: var(--accent);
+      box-shadow: none;
+    }
+
+    .ts-dropdown {
+      border: 2px solid var(--chrome);
+      border-radius: 0;
+    }
+
+    .ts-dropdown .active {
+      background: var(--chrome);
+      color: var(--bg);
+    }
+
+    .item {
+      background: var(--accent) !important;
+      color: white !important;
+      border-radius: 999px !important;
+      border: none !important;
+    }
   </style>
 </head>
 
@@ -76,35 +248,72 @@
       <span class="tonights-pick-arrow">→</span>
     </a>
 
-    <h1>Recipes</h1>
+    <div class="dinner-toolbar">
+      <div class="source-filter">
+        <button class="source-btn active" data-source="all">All</button>
+        <button class="source-btn" data-source="HOUSE">House</button>
+        <button class="source-btn" data-source="SUBMITTED">Contributed</button>
+      </div>
+      <button class="generate-btn" id="open-generate">Generate a recipe →</button>
+    </div>
+
     <div class="chip-filter">
       <button class="chip" th:each="name : ${ingredientNames}" th:text="${name}" th:attr="data-name=${name}">
       </button>
     </div>
-    <form id="ai-form" th:action="@{/dinner/ai-recipe}" method="post" style="display:none; margin-bottom: 1.5rem;">
-      <div id="ai-inputs"></div>
-      <button type="submit" class="chip selected">Don't see anything you like? Ask AI</button>
-    </form>
 
     <section class="project-grid">
-      <a class="project-card" th:each="recipe : ${recipes}" th:href="@{/dinner/{slug}(slug=${recipe.slug})}"
-        th:attr="data-ingredients=${recipe.ingredientNames}">
+      <a class="project-card" th:each="recipe : ${recipes}"
+         th:href="@{/dinner/{slug}(slug=${recipe.slug})}"
+         th:attr="data-ingredients=${recipe.ingredientNames},data-source=${recipe.source != null ? recipe.source.name() : 'HOUSE'}">
+        <span class="source-badge"
+              th:classappend="${recipe.source != null and recipe.source.name() == 'SUBMITTED'} ? ' contributed' : ' house'"
+              th:text="${recipe.source != null and recipe.source.name() == 'SUBMITTED'} ? 'Contributed' : 'House'">
+        </span>
         <h2 th:text="${recipe.title}"></h2>
       </a>
     </section>
   </main>
 
+  <!-- Generate recipe modal -->
+  <dialog id="generate-dialog" aria-labelledby="generate-title">
+    <div class="dialog-box">
+      <h2 id="generate-title">What do you have?</h2>
+      <p>Pick ingredients and we'll generate a recipe.</p>
+      <form th:action="@{/dinner/ai-recipe}" method="post" id="generate-form">
+        <select id="ingredient-select" name="ingredients" multiple placeholder="Search ingredients..."></select>
+        <div class="dialog-actions">
+          <button type="submit" class="btn-primary">Generate</button>
+          <button type="button" class="btn-ghost" id="close-generate">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <script th:inline="javascript">
+    const INGREDIENT_OPTIONS = /*[[${ingredientOptions}]]*/ [];
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
   <script>
-    const chips = document.querySelectorAll('.chip[data-name]');
+    // ── Source filter ──
     const cards = document.querySelectorAll('.project-card');
-    const aiForm = document.getElementById('ai-form');
-    const aiInputs = document.getElementById('ai-inputs');
+    const chips = document.querySelectorAll('.chip[data-name]');
     const selected = new Set();
+    let activeSource = 'all';
+
+    document.querySelectorAll('.source-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.source-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeSource = btn.dataset.source;
+        filter();
+      });
+    });
 
     chips.forEach(chip => {
       chip.addEventListener('click', () => {
-        const name = chip.dataset.name;
         chip.classList.toggle('selected');
+        const name = chip.dataset.name;
         selected.has(name) ? selected.delete(name) : selected.add(name);
         filter();
       });
@@ -112,16 +321,71 @@
 
     function filter() {
       cards.forEach(card => {
+        const sourceMatch = activeSource === 'all' || card.dataset.source === activeSource;
+        if (!sourceMatch) { card.style.display = 'none'; return; }
         if (selected.size === 0) { card.style.display = ''; return; }
         const ingredients = new Set(card.dataset.ingredients.split(','));
         card.style.display = [...selected].every(s => ingredients.has(s)) ? '' : 'none';
       });
-
-      aiInputs.innerHTML = [...selected]
-        .map(s => `<input type="hidden" name="ingredients" value="${s}">`)
-        .join('');
-      aiForm.style.display = selected.size > 0 ? '' : 'none';
     }
+
+    // ── Generate modal ──
+    const dialog = document.getElementById('generate-dialog');
+    function openDialog() {
+      dialog.querySelector('.dialog-error')?.remove();
+      ts.clear();
+      dialog.showModal();
+    }
+    function closeDialog() { dialog.close(); }
+
+    document.getElementById('open-generate').addEventListener('click', openDialog);
+    document.getElementById('close-generate').addEventListener('click', closeDialog);
+    dialog.addEventListener('click', e => { if (e.target === dialog) closeDialog(); });
+
+    document.getElementById('generate-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = e.target.querySelector('[type=submit]');
+      btn.disabled = true;
+      btn.textContent = 'Generating…';
+      dialog.querySelector('.dialog-error')?.remove();
+
+      try {
+        const response = await fetch(e.target.action, {
+          method: 'POST',
+          body: new URLSearchParams(new FormData(e.target)),
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        });
+        const data = await response.json();
+        if (response.ok) {
+          window.location.href = data.redirect;
+        } else {
+          showGenerateError(data.error);
+          btn.disabled = false;
+          btn.textContent = 'Generate';
+        }
+      } catch {
+        showGenerateError('Something went wrong. Try again.');
+        btn.disabled = false;
+        btn.textContent = 'Generate';
+      }
+    });
+
+    function showGenerateError(message) {
+      const p = Object.assign(document.createElement('p'), { className: 'dialog-error', textContent: message });
+      document.getElementById('ingredient-select').before(p);
+    }
+
+    const ts = new TomSelect('#ingredient-select', {
+      options: INGREDIENT_OPTIONS.map(name => ({ value: name, text: name })),
+      valueField: 'value',
+      labelField: 'text',
+      searchField: ['text'],
+      plugins: ['remove_button'],
+      create: false,
+      maxItems: 20,
+      placeholder: 'Search ingredients...',
+      onItemAdd() { this.setTextboxValue(''); this.refreshOptions(); }
+    });
   </script>
 
 </body>

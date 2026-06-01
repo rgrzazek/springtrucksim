@@ -15,6 +15,9 @@ public class Recipe {
     private String title;
     private String slug;
 
+    @Enumerated(EnumType.STRING)
+    private RecipeSource source;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "recipe_ingredient", joinColumns = @JoinColumn(name = "recipe_id"))
     @OrderColumn(name = "position")
@@ -46,4 +49,7 @@ public class Recipe {
 
     public List<String> getMethod() { return method; }
     public void setMethod(List<String> method) { this.method = method; }
+
+    public RecipeSource getSource() { return source; }
+    public void setSource(RecipeSource source) { this.source = source; }
 }

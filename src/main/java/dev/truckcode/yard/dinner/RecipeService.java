@@ -29,10 +29,14 @@ public class RecipeService {
         return recipeRepository.findAll();
     }
 
+    public Recipe save(Recipe recipe) {
+        return recipeRepository.save(recipe);
+    }
+
     public List<String> getAllIngredientNames() {
         return recipeRepository.findAll().stream()
                 .flatMap(r -> r.getIngredients().stream())
-                .filter(i -> !"staple".equals(i.type()))
+                .filter(i -> i.getIngredientType() != IngredientType.STAPLE)
                 .map(Ingredient::name)
                 .distinct()
                 .sorted()

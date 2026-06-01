@@ -36,4 +36,10 @@ public class Ingredient {
     public void setQuantity(String quantity) { this.quantity = quantity; }
     public void setDisplay(String display)   { this.display = display; }
     public void setType(String type)         { this.type = type; }
+
+    public IngredientType getIngredientType() {
+        if (type == null) return null;
+        try { return IngredientType.valueOf(type.toUpperCase()); }
+        catch (IllegalArgumentException e) { return null; }
+    }
 }

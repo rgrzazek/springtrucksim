@@ -1,0 +1,18 @@
+.source-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.source-badge.house {
+  background: var(--chrome);
+  color: var(--bg);
+}
+
+.source-badge.contributed {
+  background: var(--accent);
+  color: white;
+}

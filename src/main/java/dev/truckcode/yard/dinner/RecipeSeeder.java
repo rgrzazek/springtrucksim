@@ -21,7 +21,10 @@ public class RecipeSeeder implements CommandLineRunner {
 
         var json = new JsonRecipeRepository(objectMapper);
         var recipes = json.findAll();
-        recipes.forEach(r -> r.setId(null));
+        recipes.forEach(r -> {
+            r.setId(null);
+            r.setSource(RecipeSource.HOUSE);
+        });
         recipeRepository.saveAll(recipes);
     }
 }

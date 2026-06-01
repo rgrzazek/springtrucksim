@@ -4,9 +4,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.JdkClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestClientResponseException;
 
+import java.net.http.HttpClient;
 import java.util.List;
 import java.util.Map;
 
@@ -19,17 +22,22 @@ public class GeminiService {
     @Value("${gemini.api.key:}")
     private String apiKey;
 
-    private static final String GEMINI_URL =
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
+    private static final String GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 
     public GeminiService(RestClient.Builder builder, ObjectMapper objectMapper) {
-        this.restClient = builder.build();
+        var httpClient = HttpClient.newBuilder()
+                .followRedirects(HttpClient.Redirect.NEVER)
+                .build();
+        this.restClient = builder
+                .requestFactory(new JdkClientHttpRequestFactory(httpClient))
+                .build();
         this.objectMapper = objectMapper;
     }
 
-    public Recipe generateRecipe(List<String> ingredients) {
+    public GeminiResult generateRecipe(List<String> ingredients) {
+
         if (apiKey.isBlank()) {
-            throw new IllegalStateException("Gemini API key not configured");
+            return new GeminiResult.Failure(new IllegalStateException("Gemini API key not configured"));
         }
 
         String prompt = """
@@ -43,17 +51,18 @@ public class GeminiService {
                 {
                   "title": "Recipe Name",
                   "ingredients": [
-                    {"name": "ingredient", "quantity": "amount", "display": "amount ingredient"}
+                    {"name": "ingredient", "quantity": "amount", "display": "amount ingredient", "type": "FRESH"}
                   ],
                   "method": ["Step 1.", "Step 2."]
                 }
-                """.formatted(String.join(", ", ingredients));
+
+                For each ingredient, set "type" to one of: FRESH (perishables — meat, produce, dairy), PANTRY (shelf-stable — canned, dry goods, condiments), or STAPLE (salt, pepper, oil, butter, water).
+                """
+                .formatted(String.join(", ", ingredients));
 
         Map<String, Object> body = Map.of(
                 "contents", List.of(Map.of(
-                        "parts", List.of(Map.of("text", prompt))
-                ))
-        );
+                        "parts", List.of(Map.of("text", prompt)))));
 
         try {
             String response = restClient.post()
@@ -69,9 +78,16 @@ public class GeminiService {
             if (text.startsWith("```")) {
                 text = text.replaceAll("^```[a-z]*\\n?", "").replaceAll("\\n?```$", "").strip();
             }
-            return objectMapper.readValue(text, Recipe.class);
+            return new GeminiResult.Success(objectMapper.readValue(text, Recipe.class));
+        } catch (RestClientResponseException e) {
+            var status = e.getStatusCode().value();
+            if (status == 429 || status == 503 || e.getStatusCode().is3xxRedirection()) {
+                return new GeminiResult.OverCapacity();
+            }
+            return new GeminiResult.Failure(e);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to generate recipe", e);
+            return new GeminiResult.Failure(e);
         }
+
     }
 }
